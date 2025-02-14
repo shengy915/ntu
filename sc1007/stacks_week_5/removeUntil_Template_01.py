@@ -103,6 +103,15 @@ class Stack:
 
 def removeUntil(stack, value):
 # Write your code here #
+    head = stack.ll.head
+    while stack.ll.size > 0:
+        if head.item == value:
+            stack.ll.head = head
+            break
+        else:
+            stack.ll.size -= 1
+            head = head.next
+    return stack
 
 if __name__ == "__main__":
     stack = Stack()
