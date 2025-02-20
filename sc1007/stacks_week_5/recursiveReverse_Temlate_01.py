@@ -97,7 +97,28 @@ class Queue:
         return self.ll.size == 0
 
 def recursiveReverse(queue):
- # Write your code here #
+# Write your code here #
+    head = queue.ll.head
+    queue.ll.tail = queue.ll.head
+    
+    def recursive(queue,pre,size):
+        
+        if size == 2:
+            head = queue
+            queue.next = pre
+            print(queue.item)
+            return head
+        else:
+            cur = queue.next
+            head = recursive(cur,queue,size-1)
+            queue.next = pre
+            print(queue.item)
+            return head
+    head = recursive(head.next,head,queue.ll.size)
+    queue.ll.head = head
+    queue.ll.tail.next = None
+
+    return 1
 
 if __name__ == "__main__":
     queue = Queue()
