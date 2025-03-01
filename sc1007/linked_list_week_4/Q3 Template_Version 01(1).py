@@ -49,8 +49,42 @@ def deleteList(ptrHead):
         cur = temp
     return None
 
-def split(head, ptrEvenList, ptrOddList):
+def split(head, EvenList, OddList):
     # write your code here #
+    
+    cur = head
+    ptrEvenList = None
+    ptrOddList = None
+    
+    while cur != None:
+        if cur.num%2 == 0:
+            EvenList.append(cur.num)
+        else:
+            OddList.append(cur.num)
+        
+        cur = cur.next
+    print(OddList)
+    print(EvenList)
+    index = 0
+    for i in EvenList:
+        try:
+            ptrEvenList = insertNode(ptrEvenList, index, i)
+            print(f"Successfully inserted {i} at index {index}")
+            index += 1
+        except ValueError:
+            pass
+
+    index = 0
+    for i in OddList:
+        try:
+            ptrOddList = insertNode(ptrOddList, index, i)
+            print(f"Successfully inserted {i} at index {index}")
+            index += 1
+        except ValueError:
+            pass
+    return head,ptrEvenList,ptrOddList
+
+
 
 if __name__ == "__main__":
     head = None
@@ -73,16 +107,13 @@ if __name__ == "__main__":
     print("The original list:", end=" ")
     printList(head)
     
-    split(head, evenHead, oddHead)
+    head, evenHead, oddHead = split(head, evenHead, oddHead)
     
     print("\nAfter split() was called:")
     print("The original list:", end=" ")
     printList(head)
     print("The even list:", end=" ")
-    printList(evenHead[0])
+    printList(evenHead)
     print("The odd list:", end=" ")
-    printList(oddHead[0])
+    printList(oddHead)
     
-    head = deleteList(head)
-    oddHead[0] = deleteList(oddHead[0])
-    evenHead[0] = deleteList(evenHead[0])

@@ -50,6 +50,38 @@ def deleteList(ptrHead):
 
 def duplicateReverse(head, ptrNewHead):
     # write your code here #
+    cur = head
+    new_head = None
+    new_tail = head
+    prev = None
+    index = 0
+    dupe_head = None
+    if head.next == None:
+        ptrNewHead.append(head)
+        return
+    
+    while cur != None:
+        item = cur.num
+        dupe_head = insertNode(dupe_head, index, item)
+        index += 1
+        cur = cur.next
+
+    cur = dupe_head
+    while cur != None:
+        
+        new_head = cur
+        if prev == None:
+            prev = cur
+            cur = cur.next
+            prev.next = None
+
+        else:
+            temp = cur.next
+            cur.next = prev
+            prev = cur
+            cur = temp
+
+    ptrNewHead.append(new_head)
 
 if __name__ == "__main__":
     head = None
@@ -74,7 +106,7 @@ if __name__ == "__main__":
     print("The original list:", end=" ")
     printList(head)
     print("The duplicated reverse list:", end=" ")
-    printList(dupRevHead[0])
+    printList(dupRevHead[1])
     
     head = deleteList(head)
     dupRevHead[0] = deleteList(dupRevHead[0])
