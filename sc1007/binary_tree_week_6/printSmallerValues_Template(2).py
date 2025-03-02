@@ -22,6 +22,17 @@ def printTree(node, level=0, prefix="Root: "):
 
 def printSmallerValues(node, m):
 # Write your code here #
+    smaller = []
+    def check_value(node,m):
+        if node == None:
+            return
+        check_value(node.left,m)
+        check_value(node.right,m)
+        if node.item < m:
+            smaller.append(node.item)
+    check_value(node,m)
+    print(smaller)
+
 
 if __name__ == "__main__":
     root = BTNode(4)

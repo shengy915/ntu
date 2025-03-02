@@ -3,7 +3,7 @@ class BTNode:
         self.item = item
         self.left = left
         self.right = right
-
+        
 def print_tree_in_order(node):
     if node is None:
         return
@@ -20,16 +20,12 @@ def printTree(node, level=0, prefix="Root: "):
             if node.right:
                 printTree(node.right, level + 4, "R--- ")
 
-def mirrorTree(node):
-# Write your code here #
-    if node == None:
-        return
-    mirrorTree(node.left)
-    mirrorTree(node.right)   
-    temp = node.left
-    node.left = node.right
-    node.right = temp
-
+def smallest_value(node):
+    if node is None:
+        return float('inf')
+    left_smallest = smallest_value(node.left)
+    right_smallest = smallest_value(node.right)
+    return min(node.item, left_smallest, right_smallest)
 
 if __name__ == "__main__":
     root = BTNode(4)
@@ -40,16 +36,11 @@ if __name__ == "__main__":
     root.right.left = BTNode(3)
     root.right.right = BTNode(1)
 
-    print("Original Tree Structure:")
+    print("Tree Structure:")
     printTree(root)
-    print("\nOriginal Tree (In-Order):")
-    print_tree_in_order(root)
-    print()
-
-    mirrorTree(root)
     
-    print("\nMirrored Tree Structure:")
-    printTree(root)
-    print("\nMirrored Tree (In-Order):")
+    print("\nTree (In-Order):")
     print_tree_in_order(root)
     print()
+    
+    print("\nThe smallest value in the tree is:", smallest_value(root))

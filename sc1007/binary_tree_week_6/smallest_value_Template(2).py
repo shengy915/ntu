@@ -22,6 +22,14 @@ def printTree(node, level=0, prefix="Root: "):
 
 def smallest_value(node):
 # Write your code here #
+    def check_smallest(node):
+        if node == None:
+            return float('inf')
+        left = check_smallest(node.left)
+        right = check_smallest(node.right)
+        
+        return min(node.item,left,right)
+    return check_smallest(node)
 
 if __name__ == "__main__":
     root = BTNode(4)

@@ -20,36 +20,31 @@ def printTree(node, level=0, prefix="Root: "):
             if node.right:
                 printTree(node.right, level + 4, "R--- ")
 
-def mirrorTree(node):
-# Write your code here #
-    if node == None:
+def printSmallerValues(node, m):
+    if node is None:
         return
-    mirrorTree(node.left)
-    mirrorTree(node.right)   
-    temp = node.left
-    node.left = node.right
-    node.right = temp
-
+    if node.item < m:
+        print(node.item, end=", ")
+    printSmallerValues(node.left, m)
+    printSmallerValues(node.right, m)
 
 if __name__ == "__main__":
     root = BTNode(4)
     root.left = BTNode(5)
     root.right = BTNode(2)
-    root.left.left = None
     root.left.right = BTNode(6)
     root.right.left = BTNode(3)
     root.right.right = BTNode(1)
 
-    print("Original Tree Structure:")
+    print("Tree Structure:")
     printTree(root)
-    print("\nOriginal Tree (In-Order):")
+    
+    print("\nTree (In-Order):")
     print_tree_in_order(root)
     print()
-
-    mirrorTree(root)
     
-    print("\nMirrored Tree Structure:")
-    printTree(root)
-    print("\nMirrored Tree (In-Order):")
-    print_tree_in_order(root)
+    # Using a hardcoded value instead of input()
+    m = 4  # You can change this value for testing
+    print(f"\nThe values smaller than {m} are:", end=" ")
+    printSmallerValues(root, m)
     print()

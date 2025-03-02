@@ -21,15 +21,13 @@ def printTree(node, level=0, prefix="Root: "):
                 printTree(node.right, level + 4, "R--- ")
 
 def mirrorTree(node):
-# Write your code here #
-    if node == None:
+    if node is None:
         return
     mirrorTree(node.left)
-    mirrorTree(node.right)   
     temp = node.left
     node.left = node.right
     node.right = temp
-
+    mirrorTree(node.left)
 
 if __name__ == "__main__":
     root = BTNode(4)

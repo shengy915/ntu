@@ -21,18 +21,15 @@ def printTree(node, level=0, prefix="Root: "):
                 printTree(node.right, level + 4, "R--- ")
 
 def hasGreatGrandchild(node):
-# Write your code here #
+    if node is None:
+        return -1
+    left_height = hasGreatGrandchild(node.left)
+    right_height = hasGreatGrandchild(node.right)
+    max_height = max(left_height, right_height)
+    if max_height > 1:
+        print(node.item, end=" ")
+    return max_height + 1
 
-    if node == None:
-        return 0
-    left = hasGreatGrandchild(node.left)
-    right = hasGreatGrandchild(node.right)
-    if max(left,right) < 3:
-        return max(left,right)+1
-    else:
-        print(node.item)
-        return 3
-    
 if __name__ == "__main__":
     # Create a tree with nodes having great-grandchildren
     root = BTNode(1)
