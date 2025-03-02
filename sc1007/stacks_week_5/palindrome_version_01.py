@@ -9,6 +9,15 @@ class LinkedList:
         self.head = None
         self.tail = None
 
+def printList(head):
+    temp = head
+    if temp is None:
+        return
+    while temp is not None:
+        print(temp.item, end=" ")
+        temp = temp.next
+    print()
+
 def findNode(ll, index):
     if ll is None or index < 0 or index >= ll.size:
         return None
@@ -92,21 +101,46 @@ class Stack:
     def isEmpty(self):
         return self.ll.size == 0
 
-def balanced(expression):
-# Write your code here #
-    stack1 = Stack()
-    match = {")": "(", "}": "{", "]":"["}
-    for i in expression:
-        if i in "{[(":
-            stack1.push(i)
-        elif i in "}])":
-            if stack1.pop() != match[i]:
-                return False
-    return stack1.isEmpty()
+class Queue:
+    def __init__(self):
+        self.ll = LinkedList()
+
+    def enqueue(self, item):
+        insertNode(self.ll, self.ll.size, item)
+
+    def dequeue(self):
+        if self.isEmpty():
+            return None
+        item = self.ll.head.item
+        removeNode(self.ll, 0)
+        return item
+
+    def isEmpty(self):
+        return self.ll.size == 0
+
+def palindrome(word):
+    stack = Stack()
+    queue = Queue()
+    
+    word = word.upper()
+    for char in word:
+        if char.isalnum():
+            stack.push(char)
+            queue.enqueue(char)
+    
+    while stack.ll.size > queue.ll.size:
+        stack.pop()
+    
+    while not stack.isEmpty():
+        if stack.pop() != queue.dequeue():
+            print("The string is not a palindrome")
+            return False
+    
+    print("The string is a palindrome")
+    return True
+
 if __name__ == "__main__":
-    expressions = ["[()]]","()", "[()]", "{[]()[]}", "[({{)])"]
-    for expr in expressions:
-        if balanced(expr):
-            print(f"Expression {expr} is balanced")
-        else:
-            print(f"Expression {expr} is not balanced")
+    print("Sample String : A man a plan a canal Panama")
+    palindrome("A man a plan a canal Panama")
+    print("Sample String : Superman in the sky")
+    palindrome("Superman in the sky")

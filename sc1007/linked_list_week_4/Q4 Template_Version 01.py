@@ -62,26 +62,25 @@ def duplicateReverse(head, ptrNewHead):
     
     while cur != None:
         item = cur.num
-        dupe_head = insertNode(dupe_head, index, item)
-        index += 1
+        dupe_head = insertNode(dupe_head, 0, item)
         cur = cur.next
 
-    cur = dupe_head
-    while cur != None:
+    # cur = dupe_head
+    # while cur != None:
         
-        new_head = cur
-        if prev == None:
-            prev = cur
-            cur = cur.next
-            prev.next = None
+    #     new_head = cur
+    #     if prev == None:
+    #         prev = cur
+    #         cur = cur.next
+    #         prev.next = None
 
-        else:
-            temp = cur.next
-            cur.next = prev
-            prev = cur
-            cur = temp
+    #     else:
+    #         temp = cur.next
+    #         cur.next = prev
+    #         prev = cur
+    #         cur = temp
 
-    ptrNewHead.append(new_head)
+    ptrNewHead.append(dupe_head)
 
 if __name__ == "__main__":
     head = None

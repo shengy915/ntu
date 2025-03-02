@@ -120,9 +120,44 @@ class Queue:
 
 def palindrome(word):
 #Write your code here #
+    newstring = ''
+    for i in word:
+        if i.isalpha():
+            newstring += i.lower()
+
+    stack1 = Stack()
+    counter = 0
+    # if len(newstring)%2 == 0:
+    num = (len(newstring)/2)
+    # else:
+    #     num = 
+    for i in newstring:
+        if counter < int(num):
+            stack1.push(i)
+        elif counter >= num:
+            item = stack1.pop()
+            if i == item:
+                pass
+            else:
+                stack1.push(item)
+        counter += 1
+    if stack1.isEmpty():
+        return True
+    else:
+        return False
+
+
 
 if __name__ == "__main__":
+    print("Sample String : Abc cba")
+    C = palindrome("Abc cba")
+    print(C)
+    print("Sample String : Abcd cba")
+    D = palindrome("Abcd cba")
+    print(D)
     print("Sample String : A man a plan a canal Panama")
-    palindrome("A man a plan a canal Panama")
+    A = palindrome("A man a plan a canal Panama")
+    print(A)
     print("Sample String : Superman in the sky")
-    palindrome("Superman in the sky")
+    B = palindrome("Superman in the sky")
+    print(B)

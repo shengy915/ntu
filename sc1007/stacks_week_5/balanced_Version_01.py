@@ -93,18 +93,20 @@ class Stack:
         return self.ll.size == 0
 
 def balanced(expression):
-# Write your code here #
-    stack1 = Stack()
-    match = {")": "(", "}": "{", "]":"["}
-    for i in expression:
-        if i in "{[(":
-            stack1.push(i)
-        elif i in "}])":
-            if stack1.pop() != match[i]:
+    stack = Stack()
+    matching = {')': '(', ']': '[', '}': '{'}
+
+    for char in expression:
+        if char in '([{':
+            stack.push(char)
+        elif char in ')]}':
+            if stack.isEmpty() or stack.pop() != matching[char]:
                 return False
-    return stack1.isEmpty()
+
+    return stack.isEmpty()
+
 if __name__ == "__main__":
-    expressions = ["[()]]","()", "[()]", "{[]()[]}", "[({{)])"]
+    expressions = ["()", "[()]", "{[]()[]}", "[({{)])"]
     for expr in expressions:
         if balanced(expr):
             print(f"Expression {expr} is balanced")
