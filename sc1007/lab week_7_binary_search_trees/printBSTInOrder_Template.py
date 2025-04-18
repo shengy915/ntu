@@ -40,6 +40,11 @@ def printTree(node, level=0, prefix="Root: "):
 def printBSTInOrder(node):
     """ Print BST items in sorted order using in-order traversal. """
 # Write your code here #
+    if node == None:
+        return
+    printBSTInOrder(node.left)
+    print(node.item)
+    printBSTInOrder(node.right)
 
 if __name__ == "__main__":
     root = None

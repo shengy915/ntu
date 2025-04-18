@@ -6,7 +6,15 @@ class BTNode:
 
 def insertBSTNode(node, value):
 # Write your code here #
-
+    if node == None:
+        return BTNode(value)
+    if value < node.item:
+        node.left = insertBSTNode(node.left,value)
+    elif value > node.item:
+        node.right = insertBSTNode(node.right, value)
+    else:
+        print("duplicate value")
+    return node
 def printTree(node, level=0, prefix="Root: "):
     if node is not None:
         print(" " * level + prefix + str(node.item))

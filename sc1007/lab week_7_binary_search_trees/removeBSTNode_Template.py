@@ -23,7 +23,63 @@ def findMin(node):
 
 def removeBSTNode(node, value):
     """ Remove a node from the BST and return the updated root. """
- # Write your code here #
+# Write your code here #
+    if node == None:
+        return -1
+    cur = node 
+    prev = None
+    while cur:
+        
+        if value > cur.item:
+            if cur.right:
+                prev = cur
+                cur = cur.right
+            else:
+                return -1 # not found
+        elif value < cur.item:
+            if cur.left:
+                prev = cur
+                cur = cur.left
+            else:
+                return -1 #not found
+                
+        else:
+            break #found
+    if (cur.left or cur.right) and not (cur.left and cur.right):
+        if cur.left:
+            if prev.item > cur.item:
+                prev.left = cur.left
+                cur.left = None
+            elif prev.item < cur.item:
+                prev.right = cur.left
+                cur.left = None
+        else:
+            if prev.item > cur.item:
+                prev.left = cur.right
+                cur.right = None
+            elif prev.item < cur.item:
+                prev.right = cur.right
+                cur.right = None
+        return node
+    
+    elif cur.left and cur.right:
+        to_del = cur
+        cur = cur.right
+        prev2 = cur
+        while cur.left:
+            prev2 = cur
+            cur = cur.left
+        prev2.left = None
+        if cur.right:
+            prev2.left = cur.right
+        cur.left = to_del.left
+        if cur != to_del.right:
+            cur.right = to_del.right
+        if prev.item> cur.item:
+            prev.left = cur
+        elif prev.item < cur.item:
+            prev.right = cur
+        return node
 
 def printBSTInOrder(node):
     """ Print BST items in sorted order using in-order traversal. """
