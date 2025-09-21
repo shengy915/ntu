@@ -97,21 +97,29 @@ def moveMinNode(head):
 			else:
 				min_tail.next =cur
 				min_tail = min_tail.next
-			if pre != None:
-				if pre.data != min:
-					pre.next = cur.next
+					
 		else:
 			if header == None:
 				header = cur
+			cur2 = cur
+			temp = cur
+			if temp.next != None:
+				while temp.next.data == min:
+					if temp.next.next == None:
+						break
+					else:
+						temp = temp.next
+			cur2.next = temp.next
 
-		pre = cur    
+
+ 
 		cur = cur.next
 	min_tail.next = header
 	return min_head       
 
 if __name__ == "__main__":
 	linked_list = LinkedList()
-	numbers = [1,2,3,1,2,3,1]
+	numbers = [1,2,3,1,1,1,2,3,1,4]
 	
 	counter = 0
 	for num in numbers:
